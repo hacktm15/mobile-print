@@ -50,9 +50,15 @@
                     controller : 'AssociationsListCtrl'
                 })
                 .state('tenants', {
-                    url : '/association/:id/tenants',
+                    url : '/association/:idAssociation/tenants',
                     templateUrl : 'js/tenants/tenants.html',
-                    controller : 'TenantsCtrl'
+                    controller : 'TenantsCtrl',
+                    resolve: {
+                        apartments: function(DAO, $stateParams) {
+                            var result = DAO.payment.getApartments($stateParams.idAssociation);
+                            return result;
+                        }
+                    }
                 })
                 .state('tenant', {
                     url : '/association/:idAssociation/tenants/:idTenant',

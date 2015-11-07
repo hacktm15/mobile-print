@@ -13,7 +13,8 @@
         function($rootScope, $log, localStorageService, PaymentDocument) {
             var key = {
                 auth: "auth",
-                authCookie: "authCookie"
+                authCookie: "authCookie",
+                apartments: "apartments"
             };
             return {
                 sync: function() {
@@ -25,31 +26,84 @@
                 },
                 payment: {
                     sync: function() {
-                        var associations = $rootScope.authInfo.admin;
 
-                        for (var idAssociation in associations) {
-                            console.log(idAssociation);
-                            //
-                            // TODO: synch method
-                            //
-                            if ( ! this.getApartments( idAssociation ) ) {
-                                PaymentDocument.getPaymentData(idAssociation).then(
-                                    function success(res) {
-                                        console.log(res.data);
-                                    },
-                                    function error() {
-                                        $log.error("Failed to sync association " + idAssociation + " payment data");
-                                    }
-                                );
+                        if ($rootScope.authInfo) {
+                            var associations = $rootScope.authInfo.admin;
+                            var self = this;
+
+                            for (var idAssociation in associations) {
+                                //
+                                // TODO: synch method
+                                //
+                                if ( ! this.getApartments( idAssociation ) ) {
+
+                                    var getPaymentData = function(idAss) {
+                                        PaymentDocument.getPaymentData(idAssociation).then(
+                                            function success(res) {
+                                                if (res.status === 200 && res.data.apData ) {
+                                                    self.savePaymentInfo(idAss, res.data);
+                                                } else {
+                                                    $log.info("No data about payments");
+                                                }
+                                            },
+                                            function error() {
+                                                $log.error("Failed to sync association " + idAssociation + " payment data");
+                                            }
+                                        );
+                                    };
+                                    //
+                                    // Create separate scope to hold idAssociation
+                                    //
+                                    getPaymentData(idAssociation);
+                                }
                             }
                         }
                     },
-                    getApartments: function(idAssociation) {
-
+                    savePaymentInfo: function(idAssociation, data) {
+                        var apartments = this._processData(data);
+                        localStorageService.set(key.apartments+ "_" + idAssociation, apartments);
                     },
-                    getPaymentInfo: function (idApartment) {
+                    getApartments: function(idAssociation) {
+                        return localStorageService.get(key.apartments + "_" + idAssociation);
+                    },
+                    _processData: function(data) {
+                        var apartments = data.apData,
+                            groups = data.agData;
 
+                        var getGroupKey = function(idEntrance, key) {
+                            var gr;
+                            for (var i = 0; i < groups.length; i++) {
+                                gr = groups[i];
+                                if (gr.idEntrance === idEntrance ) {
+                                    return gr[key];
+                                }
+                            }
+                        };
+
+                        var result = [],
+                            apartment;
+
+                        for (var i = 0; i < apartments.length; i++) {
+                            var ap = apartments[i];
+                            apartment = {
+                                amount: ap.a,
+                                tenantName: ap.tn,
+                                penalties: ap.p,
+                                remaining: ap.r,
+
+                                apartmentNumber: ap.n,
+                                blockNumber: getGroupKey(ap.idE, "block"),
+                                entranceNumber: getGroupKey(ap.idE, "entrance")
+                            };
+
+                            result.push(apartment);
+                        }
+                        return result;
                     }
+                    //,
+                    //getPaymentInfo: function (idApartment) {
+                    //
+                    //}
                 },
                 auth: {
                     sync: function() {

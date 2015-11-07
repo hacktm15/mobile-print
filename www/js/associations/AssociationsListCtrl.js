@@ -13,8 +13,6 @@
         "Auth",
         "DAO",
         function($scope, $rootScope, $state, $ionicPopup, Auth, DAO) {
-            DAO.auth.sync();
-
             if ( ! $rootScope.authInfo ) {
                 $state.go("login");
             }
