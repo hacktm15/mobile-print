@@ -1,1 +1,1 @@
-cordova plugin add ./cordova-plugin-hello/
+cordova plugin add ./hf-printer-plugin/

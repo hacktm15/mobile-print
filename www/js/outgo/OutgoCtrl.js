@@ -23,7 +23,7 @@
             };
 
             $scope.print = function() {
-                hello.greet("World", success, failure);
+                printer.greet("World", success, failure);
             };
 
         }

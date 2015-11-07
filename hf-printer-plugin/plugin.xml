@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        id="com.example.hello"
-        version="0.7.0">
+        id="ro.homefile.printer"
+        version="0.1.0">
 
-  <name>Hello</name>
+  <name>Printer</name>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
   </engines>
 
-  <asset src="www/hello.js" target="js/hello.js"/>
+  <asset src="www/printer.js" target="js/printer.js"/>
 
-  <js-module src="www/hello.js" name="hello">
-    <clobbers target="hello" />
+  <js-module src="www/printer.js" name="printer">
+    <clobbers target="printer" />
   </js-module>
 
   <platform name="android">
 
     <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="Hello">
-        <param name="android-package" value="com.example.plugin.Hello"/>
+      <feature name="Printer">
+        <param name="android-package" value="ro.homefile.printer.Printer"/>
       </feature>
     </config-file>
 
-    <source-file src="src/android/Hello.java" target-dir="src/com/example/plugin/"/>
+    <source-file src="src/android/Printer.java" target-dir="src/ro/homefile/printer"/>
   </platform>
 
   <platform name="ios">
