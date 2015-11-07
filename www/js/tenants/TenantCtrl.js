@@ -21,7 +21,6 @@
             Outgo.get(idAssociation, idAp).then(
                 function success(res) {
                     if (res.data) {
-                        console.log(res.data.bills);
 
                         var idMonth = DAO.auth.getLastMonth(idAssociation);
                         var bills = res.data.bills;
