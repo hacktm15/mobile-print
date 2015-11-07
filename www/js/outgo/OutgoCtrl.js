@@ -15,7 +15,7 @@
         function($scope, $rootScope, $state, $ionicPopup, Auth, DAO) {
 
             var success = function(message) {
-                alert(message);
+                console.log(message);
             };
 
             var failure = function() {
@@ -23,7 +23,7 @@
             };
 
             $scope.print = function() {
-                printer.greet("World", success, failure);
+                printer.getBluetoothDevices("test", success, failure);
             };
 
         }

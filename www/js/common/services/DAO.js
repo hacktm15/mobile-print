@@ -96,6 +96,7 @@
                         for (var i = 0; i < apartments.length; i++) {
                             var ap = apartments[i];
                             apartment = {
+                                idApartment: ap.idAp,
                                 amount: ap.a,
                                 tenantName: ap.tn,
                                 penalties: ap.p,
