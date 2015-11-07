@@ -6,10 +6,9 @@
     'use strict';
 
     app.constant('Constants', {
-        env: {
-            dev: true
-        },
-        hfEndpoint: 'http://homefile.ro/'
+        env: "dev",         // dev and prod
+        //hfEndpoint: 'https://homefile.ro'
+        hfEndpoint: 'http://localhost:8100'
     });
 
 }(angular.module("homefile")));

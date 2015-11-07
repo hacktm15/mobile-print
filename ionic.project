@@ -1,4 +1,10 @@
 {
   "name": "mobile",
-  "app_id": ""
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://homefile.ro/api"
+    }
+  ]
 }

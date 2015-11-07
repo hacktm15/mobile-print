@@ -1,0 +1,22 @@
+<ion-view title="Apartamente">
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-divider">
+                <div class="row apartments-header">
+                    <div class="col-10"><b>Bl.</b></div>
+                    <div class="col-10"><b>Sc.</b></div>
+                    <div class="col-10"><b>Ap.</b></div>
+                    <div class="col-67"><b>Locatar</b></div>
+                </div>
+            </ion-item>
+            <ion-item ng-repeat="apartment in apartments">
+                <div class="row" ng-click="view(apartment.idApartment)">
+                    <div class="col-10">{{ apartment.blockName }}</div>
+                    <div class="col-10">{{ apartment.entranceName }}</div>
+                    <div class="col-10">{{ apartment.number }}</div>
+                    <div class="col-67">{{ apartment.tenantName }}</div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

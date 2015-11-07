@@ -5,8 +5,11 @@
 (function() {
     'use strict';
 
-    angular.module('homefile', ['ionic'])
-        .run(function ($ionicPlatform) {
+    angular.module('homefile', [
+        'ionic',
+        'LocalStorageModule'
+    ])
+        .run(function ($ionicPlatform, DAO) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -16,25 +19,53 @@
                 if (window.StatusBar) {
                     StatusBar.styleDefault();
                 }
+
+                DAO.sync();
             });
         })
         .config(function($logProvider, Constants){
-            if ( ! Constants.env.dev ) {
+            if ( Constants.env === "dev" ) {
                 //
                 // Allow debug messages
                 //
                 $logProvider.debugEnabled(false);
             }
         })
+        .config(function (localStorageServiceProvider) {
+            localStorageServiceProvider
+                .setPrefix('hf')
+                .setStorageType('localStorage')
+                .setNotify(false, false);
+        })
         .config(function($stateProvider, $urlRouterProvider) {
             $stateProvider
                 .state('login', {
                     url : '/login',
                     templateUrl : 'js/login/login.html',
-                    controller : 'LoginController'
+                    controller : 'LoginCtrl'
+                })
+                .state('associations', {
+                    url : '/associations',
+                    templateUrl : 'js/associations/associationsList.html',
+                    controller : 'AssociationsListCtrl'
+                })
+                .state('tenants', {
+                    url : '/association/:id/tenants',
+                    templateUrl : 'js/tenants/tenants.html',
+                    controller : 'TenantsCtrl'
+                })
+                .state('tenant', {
+                    url : '/association/:idAssociation/tenants/:idTenant',
+                    templateUrl : 'js/tenants/tenant.html',
+                    controller : 'TenantCtrl'
+                })
+                .state('outgo', {
+                    url : '/association/:idAssociation/tenants/:idTenant/month/:idMonth/outgo',
+                    templateUrl : 'js/outgo/outgo.html',
+                    controller : 'OutgoCtrl'
                 });
 
-            $urlRouterProvider.otherwise('/login');
+            $urlRouterProvider.otherwise('/associations');
         });
 
 }());

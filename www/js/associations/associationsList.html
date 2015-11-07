@@ -1,0 +1,15 @@
+<ion-view title="Asociații" hide-back-button="true">
+    <ion-nav-buttons side="right">
+        <button class="button button-assertive" ng-click="logout()">
+            <i class="icon ion-log-out"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item ng-repeat="(key,association) in authInfo.admin">
+                <a href="javascript:void(0)" ui-sref="tenants({'id': key})">{{association.asName}}</a>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
