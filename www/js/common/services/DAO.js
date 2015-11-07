@@ -68,7 +68,8 @@
                     },
                     _processData: function(data) {
                         var apartments = data.apData,
-                            groups = data.agData;
+                            groups = data.agData,
+                            funds = data.fundAps;
 
                         var getGroupKey = function(idEntrance, key) {
                             var gr;
@@ -76,6 +77,15 @@
                                 gr = groups[i];
                                 if (gr.idEntrance === idEntrance ) {
                                     return gr[key];
+                                }
+                            }
+                        };
+
+                        var getFund = function(idAp, key) {
+                            for (var i = 0; i < funds.length; i++) {
+                                var fund = funds[i];
+                                if (fund.idAp = idAp) {
+                                    return fund[key];
                                 }
                             }
                         };
@@ -93,7 +103,10 @@
 
                                 apartmentNumber: ap.n,
                                 blockNumber: getGroupKey(ap.idE, "block"),
-                                entranceNumber: getGroupKey(ap.idE, "entrance")
+                                entranceNumber: getGroupKey(ap.idE, "entrance"),
+
+                                fundBalance: getFund(ap.idAp, "b"),
+                                fundDepth: getFund(ap.idAp, "d")
                             };
 
                             result.push(apartment);
