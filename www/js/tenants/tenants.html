@@ -1,5 +1,11 @@
 <ion-view title="Apartamente">
     <ion-content>
+
+        <label class="item item-input" style="margin-bottom: 10px;">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Căutare..." ng-model="query">
+        </label>
+
         <ion-list>
             <ion-item class="item-divider">
                 <div class="row apartments-header">
@@ -9,7 +15,7 @@
                     <div class="col-67"><b>Locatar</b></div>
                 </div>
             </ion-item>
-            <ion-item ng-repeat="apartment in apartments">
+            <ion-item ng-repeat="apartment in apartments | filter:query">
                 <div class="row" ng-click="view(apartment.idApartment)">
                     <div class="col-10">{{ apartment.blockName }}</div>
                     <div class="col-10">{{ apartment.entranceName }}</div>
