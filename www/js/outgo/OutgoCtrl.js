@@ -14,6 +14,18 @@
         "DAO",
         function($scope, $rootScope, $state, $ionicPopup, Auth, DAO) {
 
+            var success = function(message) {
+                alert(message);
+            };
+
+            var failure = function() {
+                alert("Error calling Hello Plugin");
+            };
+
+            $scope.print = function() {
+                hello.greet("World", success, failure);
+            };
+
         }
     ]);
 

@@ -7,8 +7,8 @@
 
     app.constant('Constants', {
         env: "dev",         // dev and prod
-        //hfEndpoint: 'https://homefile.ro'
-        hfEndpoint: 'http://localhost:8100'
+        hfEndpoint: 'https://homefile.ro'
+        //hfEndpoint: 'http://localhost:8100'
     });
 
 }(angular.module("homefile")));
