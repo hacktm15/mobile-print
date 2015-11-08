@@ -12,32 +12,13 @@
         "$state",
         "$stateParams",
         "$ionicPopup",
-        "Outgo",
         "DAO",
-        function($scope, $rootScope, $log, $state, $stateParams, $ionicPopup, Outgo, DAO) {
+        function($scope, $rootScope, $log, $state, $stateParams, $ionicPopup, DAO) {
             var idAssociation = $stateParams.idAssociation;
             var idAp = $stateParams.idTenant;
 
-            Outgo.get(idAssociation, idAp).then(
-                function success(res) {
-                    if (res.data) {
-
-                        var idMonth = DAO.auth.getLastMonth(idAssociation);
-                        var bills = res.data.bills;
-
-                        var lastBill = bills[bills.length - 1];
-
-                        if (lastBill.idMonth != idMonth ) {
-
-                        }
-                        $scope.idLastMonth = idMonth;
-                        $scope.lastBill = lastBill;
-                    }
-                },
-                function error() {
-                    $log.error("Could not get outgo");
-                }
-            );
+            $scope.apart_info = DAO.payment.getApartmentsById(idAssociation,idAp);
+            console.log("q",$scope.apart_info);
 
             $scope.pay = function() {
                 $state.go("outgo", {
@@ -46,6 +27,7 @@
                     idMonth: $scope.idLastMonth
                 });
             }
+
         }
     ]);
 

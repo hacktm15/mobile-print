@@ -17,9 +17,9 @@
             </ion-item>
             <ion-item ng-repeat="apartment in apartments | filter:query">
                 <div class="row" ng-click="view(apartment.idApartment)">
-                    <div class="col-10">{{ apartment.blockName }}</div>
-                    <div class="col-10">{{ apartment.entranceName }}</div>
-                    <div class="col-10">{{ apartment.number }}</div>
+                    <div class="col-10">{{ apartment.blockNumber }}</div>
+                    <div class="col-10">{{ apartment.entranceNumber }}</div>
+                    <div class="col-10">{{ apartment.apartmentNumber }}</div>
                     <div class="col-67">{{ apartment.tenantName }}</div>
                 </div>
             </ion-item>

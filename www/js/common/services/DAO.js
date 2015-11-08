@@ -64,12 +64,25 @@
                         localStorageService.set(key.apartments+ "_" + idAssociation, apartments);
                     },
                     getApartments: function(idAssociation) {
+                        //debugger
                         return localStorageService.get(key.apartments + "_" + idAssociation);
+                    },
+                    getApartmentsById: function(idAssociation, idApartment) {
+                       // debugger
+                        var apartments =  localStorageService.get(key.apartments + "_" + idAssociation);
+
+                        for (var i = 0; i < apartments.length; i++) {
+                            var ap = apartments[i];
+                            if ( ap.idApartment == idApartment) {
+                                return ap;
+                            }
+                        }
                     },
                     _processData: function(data) {
                         var apartments = data.apData,
                             groups = data.agData,
                             funds = data.fundAps;
+
 
                         var getGroupKey = function(idEntrance, key) {
                             var gr;
@@ -100,13 +113,14 @@
                                 tenantName: ap.tn,
                                 penalties: ap.p,
                                 remaining: ap.r,
-
+                                idApartment : ap.idAp,
+                                //todo: get real penalties, nP, nR
                                 apartmentNumber: ap.n,
                                 blockNumber: getGroupKey(ap.idE, "block"),
                                 entranceNumber: getGroupKey(ap.idE, "entrance"),
 
                                 fundBalance: getFund(ap.idAp, "b"),
-                                fundDepth: getFund(ap.idAp, "d")
+                                fundDebt: getFund(ap.idAp, "d")
                             };
 
                             result.push(apartment);

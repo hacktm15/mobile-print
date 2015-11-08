@@ -1,11 +1,69 @@
 <ion-view title="Facturi">
     <ion-content>
-        <h3>Ultima luna: </h3>
-        <div class="text-center">
-            <p class="padding" style="font-size: 40px;"><span class="assertive">{{ lastBill.a }}</span> RON</p>
-        </div>
+
+ <div class="list card"> 
+  <div class="item">
+    <h2>Cheltuieli luna Octombrie 2015</h2>
+  </div>
+
+   <div class="row">
+ 		<div class="col">Taxe: <br>Restante: <br>Rest plata: </div>	
+ 		<div class="col">{{apart_info.amount }} RON<br> {{apart_info.penalties}} RON<br> 100 RON</div>
+  </div>
+  <div class="row">
+ 		<div class="col">Valoare plata:</div>	
+ 		<div class="col">
+    			<input type="number" value="100" style="background-color:#eee">
+ 		</div>	  	
+  </div>
+
+    <div class="item">
+   	 <div class="row">
+ 		<div class="col">Penalizari: <br>Rest penalizari: </div>	
+ 		<div class="col">23 RON<br>12 RON</div>
+  </div>
+  <div class="row">
+ 		<div class="col">Valoare penalizari</div>	
+ 		<div class="col">
+    			<input type="number" value="{{apart_info.penalties - apart_info.overdue}}" style="background-color:#eee">
+ 		</div>	  	
+  </div>
+
+  </div>
         <button class="button button-block button-calm" ng-click="pay()">
             Plătește
         </button>
+</div>
+
+ <div class="list card"> 
+  <div class="item">
+    <h2>Fond reparatii</h2>
+  </div>
+  <div class="item">
+   	 <div class="row">
+ 		<div class="col">Total plata:</div>	
+ 		<div class="col">{{apart_info.fundDebt }} RON</div>	  	
+ 	</div>
+  	<div class="row">
+ 		<div class="col">Platit deja:</div>	
+ 		<div class="col">{{apart_info.fundBalance }} RON</div>	  	
+ 	 </div>
+ 	 <div class="row">
+ 		<div class="col">Rest plata:</div>	
+ 		<div class="col">{{apart_info.fundDebt - apart_info.fundBalance }} RON</div>	  	
+ 	 </div>
+ 	 <div class="row">
+ 		<div class="col">Valoare plata:</div>	
+ 		<div class="col">
+    			<input type="number" value="{{apart_info.fundDebt - apart_info.fundBalance }}" style="background-color:#eee">
+ 		</div>	  	
+ 	 </div>
+
+  </div>
+        <button class="button button-block button-calm" ng-click="pay()">
+            Plătește
+        </button>
+</div>
+
     </ion-content>
 </ion-view>
