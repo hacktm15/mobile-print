@@ -17,8 +17,6 @@
             var idAssociation = $stateParams.idAssociation;
             $scope.apartments = apartments;
 
-            console.log(apartments);
-
             $scope.view = function(idApartment) {
                 $state.go("tenant", {idAssociation: idAssociation, idTenant: idApartment});
             }

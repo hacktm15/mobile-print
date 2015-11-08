@@ -16,11 +16,9 @@
             $scope.data = {};
 
             $scope.login = function() {
+
                 Auth.login($scope.data.username, $scope.data.password).then(
                     function success(res) {
-                        //console.log(res);
-                        //console.log(arguments);
-
                         if (res.data.isAdmin) {
                             DAO.auth.set(res.data);
 
