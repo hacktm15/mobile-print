@@ -19,10 +19,13 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    {
+      "locator": "https://github.com/tanelih/phonegap-bluetooth-plugin.git",
+      "id": "com.phonegap.plugins.bluetooth"
+    }
   ],
   "cordovaPlatforms": [
-    "ios",
     "android"
   ]
 }
